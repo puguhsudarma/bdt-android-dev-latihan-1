@@ -1,10 +1,12 @@
 package com.reroet.bdtbatch2_latihan.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.reroet.bdtbatch2_latihan.MainActivity;
 import com.reroet.bdtbatch2_latihan.R;
 import com.reroet.bdtbatch2_latihan.pojo.Orang;
 import com.reroet.bdtbatch2_latihan.viewHolder.OrangViewHolder;
@@ -17,9 +19,11 @@ import java.util.List;
 
 public class OrangAdapter extends RecyclerView.Adapter<OrangViewHolder> {
     private List<Orang> list;
+    private Activity activity;
 
-    public OrangAdapter(List<Orang> list){
+    public OrangAdapter(List<Orang> list, Activity setactivity){
         this.list = list;
+        this.activity = setactivity;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class OrangAdapter extends RecyclerView.Adapter<OrangViewHolder> {
 
     @Override
     public void onBindViewHolder(OrangViewHolder holder, int position) {
-        holder.bind(list.get(position));
+        holder.bind(list.get(position), activity);
     }
 
     @Override
