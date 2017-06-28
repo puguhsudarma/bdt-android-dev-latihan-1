@@ -1,5 +1,6 @@
 package com.reroet.bdtbatch2_latihan;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -46,6 +49,30 @@ public class DashboardActivity extends AppCompatActivity {
         adapter = new OrangAdapter(orangs, this);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menu_logout:
+                //do something to logout and back to login screen
+                new PrefManager().saveBool(this, "isLoggedIn", false);
+                Intent main = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(main);
+                DashboardActivity.this.finish();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private void createDataDummy(){
