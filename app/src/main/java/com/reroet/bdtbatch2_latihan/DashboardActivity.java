@@ -1,6 +1,8 @@
 package com.reroet.bdtbatch2_latihan;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.reroet.bdtbatch2_latihan.adapter.OrangAdapter;
 import com.reroet.bdtbatch2_latihan.pojo.Orang;
+import com.reroet.bdtbatch2_latihan.utilities.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +30,16 @@ public class DashboardActivity extends AppCompatActivity {
     private OrangAdapter adapter;
     private List<Orang> orangs = new ArrayList<>();
 
+    private PrefManager pref = new PrefManager();
+
     // TODO: 19/06/17 membuat on Create
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        String username = pref.getString(this, "username");
+        getSupportActionBar().setSubtitle(username);
 
         rv = (RecyclerView) findViewById(R.id.rv);
         createDataDummy();
