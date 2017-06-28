@@ -37,4 +37,18 @@ public class PrefManager {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(key, false);
     }
+
+    public void clearData(Context context, String key){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .remove(key)
+                .apply();
+    }
+
+    public void clearAll(Context context){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .clear()
+                .apply();
+    }
 }
